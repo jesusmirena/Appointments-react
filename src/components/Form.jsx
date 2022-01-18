@@ -58,7 +58,7 @@ const Form = () => {
             htmlFor="discharge"
             className="block text-gray-700 uppercase font-bold"
           >
-            Veterinary discharge
+            Date of discharge
           </label>
           <input
             id="discharge"
