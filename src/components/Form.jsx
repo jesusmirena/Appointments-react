@@ -1,8 +1,24 @@
-import React from "react";
+import { useState } from "react";
 
 const Form = () => {
+  const [petName, setPetName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [email, setEmail] = useState("");
+  const [date, setDate] = useState("");
+  const [symptoms, setSymptoms] = useState("");
+  const [error, setError] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if ([petName, ownerName, email, date, symptoms].includes("")) {
+      setError(true);
+      return;
+    }
+    setError(false);
+  }
+
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="md:w-1/2 lg:w-2/5 mx-5">
       <h2 className="font-black text-3xl text-center">Follow-up of patients</h2>
 
       <p className="text-lg mt-5 text-center mb-10">
@@ -10,7 +26,15 @@ const Form = () => {
         <span className="text-indigo-600 font-bold">administer them</span>
       </p>
 
-      <form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
+      >
+        {error && (
+          <div className="bg-red-700 text-white text-center p-3 mb-3 uppercase font-bold rounded-md">
+            <p>all fields are mandatory</p>
+          </div>
+        )}
         <div className="mb-5">
           <label
             htmlFor="pet"
@@ -23,6 +47,8 @@ const Form = () => {
             type="text"
             placeholder="Your pet's name"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={petName}
+            onChange={(e) => setPetName(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -37,6 +63,8 @@ const Form = () => {
             type="text"
             placeholder="Your name"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={ownerName}
+            onChange={(e) => setOwnerName(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -51,6 +79,8 @@ const Form = () => {
             type="email"
             placeholder="Your email"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -64,6 +94,8 @@ const Form = () => {
             id="discharge"
             type="date"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -77,6 +109,8 @@ const Form = () => {
             id="symptoms"
             placeholder="Describe your pet's symptoms"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={symptoms}
+            onChange={(e) => setSymptoms(e.target.value)}
           />
         </div>
         <input
