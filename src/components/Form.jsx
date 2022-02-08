@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Error from "./Error";
 
-const Form = ({ setPatients }) => {
+const Form = ({ setPatients, patient }) => {
   const [petName, setPetName] = useState("");
 
   const [ownerName, setOwnerName] = useState("");
@@ -9,6 +9,16 @@ const Form = ({ setPatients }) => {
   const [date, setDate] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(patient).length > 0) {
+      setPetName(patient.petName);
+      setOwnerName(patient.ownerName);
+      setEmail(patient.email);
+      setDate(patient.date);
+      setSymptoms(patient.symptoms);
+    }
+  }, [patient]);
 
   const generateId = () => {
     const random = Math.random().toString(36).substring(2);
@@ -137,6 +147,7 @@ const Form = ({ setPatients }) => {
           />
         </div>
         <input
+          value="Add Patient"
           type="submit"
           className="bg-indigo-600 w-full 
           p-3 text-white uppercase font-bold 
