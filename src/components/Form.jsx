@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-const Form = () => {
+const Form = ({ setPatients }) => {
   const [petName, setPetName] = useState("");
+
   const [ownerName, setOwnerName] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
@@ -10,11 +11,29 @@ const Form = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    //form validation
     if ([petName, ownerName, email, date, symptoms].includes("")) {
       setError(true);
       return;
     }
     setError(false);
+
+    const patientObj = {
+      petName,
+      ownerName,
+      email,
+      date,
+      symptoms,
+    };
+
+    setPatients((patients) => [...patients, patientObj]);
+
+    //Reset form
+    setPetName();
+    setOwnerName();
+    setEmail();
+    setDate();
+    setSymptoms();
   }
 
   return (
