@@ -30,11 +30,11 @@ const Form = ({ setPatients }) => {
     setPatients((patients) => [...patients, patientObj]);
 
     //Reset form
-    setPetName();
-    setOwnerName();
-    setEmail();
-    setDate();
-    setSymptoms();
+    setPetName("");
+    setOwnerName("");
+    setEmail("");
+    setDate("");
+    setSymptoms("");
   }
 
   return (
