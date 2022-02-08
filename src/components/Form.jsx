@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Error from "./Error";
 
-const Form = ({ setPatients, patient }) => {
+const Form = ({ patients, setPatients, patient, setPatient }) => {
   const [petName, setPetName] = useState("");
 
   const [ownerName, setOwnerName] = useState("");
@@ -41,11 +41,21 @@ const Form = ({ setPatients, patient }) => {
       email,
       date,
       symptoms,
-      id: generateId(),
     };
 
-    setPatients((patients) => [...patients, patientObj]);
-
+    if (patient.id) {
+      //Updating patient info
+      patientObj.id = patient.id;
+      const updatedPatients = patients.map((patientState) =>
+        patientState.id === patient.id ? patientObj : patientState
+      );
+      setPatients(updatedPatients);
+      setPatient({});
+    } else {
+      //New patient
+      patientObj.id = generateId();
+      setPatients((patients) => [...patients, patientObj]);
+    }
     //Reset form
     setPetName("");
     setOwnerName("");
