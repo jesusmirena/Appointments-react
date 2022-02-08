@@ -147,7 +147,7 @@ const Form = ({ setPatients, patient }) => {
           />
         </div>
         <input
-          value="Add Patient"
+          value={patient.id ? "Edit Patient" : "Add Patient"}
           type="submit"
           className="bg-indigo-600 w-full 
           p-3 text-white uppercase font-bold 
